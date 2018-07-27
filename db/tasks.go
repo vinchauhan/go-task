@@ -14,14 +14,15 @@ type Task struct {
 	Value string
 }
 
+//exported function
 func Init(dbPath string) error {
 	var err error
 	db, err = bolt.Open(dbPath, 0060, &bolt.Options{Timeout: 1 * time.Second})
 	if err != nil {
 		return err
 	}
-	return db.Update(func(tx *bolt.Tx) error) {
-		_, err := tx.CreateBuketIfNotExists(taskBucket)
+	return db.Update(func(tx *bolt.Tx) error {
+		_, err := tx.CreateBucketIfNotExists(taskBucket)
 		return err
-	}
+	})
 }
