@@ -12,4 +12,7 @@ func main() {
 	home, _ := homedir.Dir()
 	dbPath := filepath.Join(home, "tasks.db")
 	err := db.Init(dbPath)
+	if err != nil {
+		panic(err)
+	}
 }
